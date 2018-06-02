@@ -11,33 +11,39 @@ import { Service } from '../../providers/service';
   providers:[Geolocation, OneSignalService]
 })
 export class HomePage {
-  public lat: number;
-  public long: number;
+  public grupo: string;
+  public listGroup: any;
+
   constructor(public navCtrl: NavController, 
     private geolocation: Geolocation, 
     private oneSignalService: OneSignalService, 
     private http: Http,
     private service: Service) {
-
+      this.grupo = "";
+      this.listGroup = [];
+      this.getAllGroups();
   }
 
-  public getMyPosition(){
-    this.oneSignalService.getAppId().then()
-    console.log("plegue");
-    this.geolocation.getCurrentPosition().then((position)=>{
-      this.updateUserDevice(position);
-    });
+  public getAllGroups(){
+    console.log("chegou aqui");
+    
+    this.service.getGroupList()
+    .subscribe(
+      res =>{
+        this.listGroup = res.json();
+      },
+      err =>{
+        console.error(err);
+      }
+    );
   }
 
-  public updateUserDevice(position){
+  public save(){
     this.oneSignalService.getAppId().then((ids) => {
-      this.lat = position.coords.latitude;
-      this.long = position.coords.longitude;
       let user = {
         "name" : "teste da silva",
-        "lat": this.lat,
-        "long": this.long,
-        "deviceId": ids.userId 
+        "deviceId": ids.userId,
+        "grupoId": this.grupo
       }
       this.setNewUser(user);
     })

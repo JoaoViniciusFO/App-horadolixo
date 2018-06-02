@@ -8,6 +8,15 @@
 
 <ion-content padding>
   Este App irá registrar sua localidade.
-  
-  <button ion-button (click)="getMyPosition()">Clique para registrar sua localidade!</button>
+
+  <br>
+  <ion-item>
+    <ion-label>
+        Selecione sua quadra abaixo.
+    </ion-label>
+    <ion-select [(ngModel)]="grupo" >
+        <ion-option *ngFor="let gp of listGroup" value="gp._id"> {{gp.name}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <button ion-button (click)="save()">Clique para registrar sua localidade!</button>
 </ion-content>

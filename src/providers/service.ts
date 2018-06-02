@@ -5,8 +5,10 @@ import {Observable} from 'rxjs/Observable';
 @Injectable()
 
 export class Service{
+    public endPoint: string;
     constructor(private http: Http){
-
+        this.endPoint = "http://localhost:5000/api";
+        //this.endPoint = "https://limitless-anchorage-11992.herokuapp.com/api";
     }
     public setNewUser(user): Observable <any>{
 
@@ -16,6 +18,10 @@ export class Service{
         });
 
         let options = new RequestOptions({ headers: headers });
-        return this.http.post("https://limitless-anchorage-11992.herokuapp.com/api/user", user)
+        return this.http.post(`${this.endPoint}/user`, user)
+    }
+
+    public getGroupList(): Observable<any>{
+        return this.http.get(`${this.endPoint}/get-groups`)
     }
 }
