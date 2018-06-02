@@ -15,7 +15,7 @@
         Selecione sua quadra abaixo.
     </ion-label>
     <ion-select [(ngModel)]="grupo" >
-        <ion-option *ngFor="let gp of listGroup" value="gp._id"> {{gp.name}}</ion-option>
+        <ion-option *ngFor="let gp of listGroup" [value]="gp._id"> {{gp.name}}</ion-option>
     </ion-select>
   </ion-item>
   <button ion-button (click)="save()">Clique para registrar sua localidade!</button>

@@ -7,7 +7,7 @@ import {Observable} from 'rxjs/Observable';
 export class Service{
     public endPoint: string;
     constructor(private http: Http){
-        this.endPoint = "http://localhost:5000/api";
+        this.endPoint = "http://192.168.1.244:5000/api";
         //this.endPoint = "https://limitless-anchorage-11992.herokuapp.com/api";
     }
     public setNewUser(user): Observable <any>{
@@ -23,5 +23,9 @@ export class Service{
 
     public getGroupList(): Observable<any>{
         return this.http.get(`${this.endPoint}/get-groups`)
+    }
+
+    public getIfExists(id): Observable<any>{
+        return this.http.get(`${this.endPoint}/user-id-dvc/${id}`)
     }
 }
